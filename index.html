@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEKA 1.5 — SMK 56 Mekatronika</title>
+
+  <!-- Font: Space Grotesk untuk judul, Inter untuk teks, Roboto Mono untuk label teknis -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Tombol hamburger (pojok kanan atas di layar HP) -->
+  <button id="hamburgerBtn" class="hamburger-btn" aria-label="Buka menu navigasi" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Overlay gelap saat sidebar terbuka di mode HP -->
+  <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+  <div class="app-shell">
+
+    <!-- ======================= SIDEBAR ======================= -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <!-- GANTI src di bawah ini dengan path logo sekolah Anda -->
+        <img src="https://placehold.co/96x96/0e1826/4fd1c5?text=LOGO" alt="Logo SMKN 56" class="sidebar-logo">
+        <p class="sidebar-brand">MEKATRONIKA</p>
+        <p class="sidebar-subbrand">SMK Negeri 56</p>
+        <p class="sidebar-status" aria-hidden="true"><span class="status-dot"></span>System Online</p>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Navigasi utama">
+        <p class="nav-label">Menu</p>
+        <ul>
+          <li><a href="#beranda" class="nav-link active" data-target="beranda">
+            <span class="nav-icon" aria-hidden="true">01</span> Beranda
+          </a></li>
+
+          <li class="nav-group">
+            <a href="#materi" class="nav-link" data-target="materi">
+              <span class="nav-icon" aria-hidden="true">02</span> Materi
+            </a>
+            <!-- Sub-menu kategori: klik langsung membuka kategori terkait di section Materi -->
+            <ul class="nav-sublist">
+              <li><a href="#materi" class="nav-sublink" data-category="dasar-digital">Dasar Digital</a></li>
+              <li><a href="#materi" class="nav-sublink" data-category="gerbang-logika">Gerbang Logika</a></li>
+              <li><a href="#materi" class="nav-sublink" data-category="aljabar-boolean">Aljabar Boolean</a></li>
+              <li><a href="#materi" class="nav-sublink" data-category="tabel-kebenaran">Tabel Kebenaran</a></li>
+              <li><a href="#materi" class="nav-sublink" data-category="rangkaian-kombinasional">Rangkaian Kombinasional</a></li>
+            </ul>
+          </li>
+
+          <li><a href="#simulator" class="nav-link" data-target="simulator">
+            <span class="nav-icon" aria-hidden="true">03</span> Simulator
+          </a></li>
+          <li><a href="#kuis" class="nav-link" data-target="kuis">
+            <span class="nav-icon" aria-hidden="true">04</span> Kuis
+          </a></li>
+          <li><a href="#progress" class="nav-link" data-target="progress">
+            <span class="nav-icon" aria-hidden="true">05</span> Progress
+          </a></li>
+          <li><a href="#tentang" class="nav-link" data-target="tentang">
+            <span class="nav-icon" aria-hidden="true">06</span> Tentang
+          </a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <p>Teknik Kontrol Mekatronika</p>
+        <p class="sidebar-version">MEKA v1.5</p>
+      </div>
+    </aside>
+
+    <!-- ======================= MAIN CONTENT ======================= -->
+    <main class="main-content">
+
+      <!-- ================= HERO / BERANDA ================= -->
+      <section id="beranda" class="hero">
+        <div class="hero-pattern" aria-hidden="true"></div>
+
+        <!-- Dekorasi visual engineering (garis sirkuit + node + pulsa sinyal). Murni dekoratif. -->
+        <div class="hero-decoration" aria-hidden="true">
+          <svg viewBox="0 0 200 260">
+            <path class="deco-line" d="M20 20 H100 V70 H160" />
+            <path class="deco-line" d="M20 90 H70 V140" />
+            <path class="deco-line" d="M100 140 H180 V200" />
+            <path class="deco-line" d="M40 200 H120 V240" />
+            <circle class="deco-node" cx="20" cy="20" r="4" />
+            <circle class="deco-node" cx="160" cy="70" r="4" />
+            <circle class="deco-node" cx="20" cy="90" r="4" />
+            <circle class="deco-node" cx="70" cy="140" r="4" />
+            <circle class="deco-node" cx="180" cy="200" r="4" />
+            <circle class="deco-node" cx="40" cy="200" r="4" />
+            <circle class="deco-node" cx="120" cy="240" r="4" />
+            <circle class="deco-pulse" cx="100" cy="70" r="3.5" />
+            <circle class="deco-pulse" cx="100" cy="140" r="3.5" />
+          </svg>
+          <!-- Anotasi teknikal kecil, sekadar detail visual -->
+          <span class="tech-annotation anno-1">MODULE 01</span>
+          <span class="tech-annotation anno-2">SIGNAL ACTIVE</span>
+          <span class="tech-annotation anno-3">26 MODULES</span>
+        </div>
+
+        <div class="hero-inner">
+          <span class="hero-module-tag">MEKA · DIGITAL LAB</span>
+
+          <!-- =====================================================
+               EDITABLE CONTENT
+               Kamu dapat mengubah teks di bagian ini secara manual.
+               Jangan menghapus ID/class HTML.
+               ===================================================== -->
+
+          <!-- EDITABLE: HERO EYEBROW -->
+          <p class="hero-eyebrow">Teknik Kontrol Mekatronika</p>
+
+          <!-- EDITABLE: HERO TITLE -->
+          <h1 class="hero-title">SMK 56 Mekatronika</h1>
+
+          <!-- EDITABLE: HERO SUBTITLE -->
+          <p class="hero-subtitle">TKM Teknik Kontrol Mekatronika</p>
+
+          <!-- EDITABLE: HERO TAGLINE -->
+          <p class="hero-tagline">Belajar sistem digital melalui simulasi, eksperimen, dan latihan interaktif. Coba ubah input di simulator dan lihat apa yang terjadi.</p>
+
+          <!-- Kartu sambutan -->
+          <div class="welcome-card">
+            <!-- EDITABLE: WELCOME TITLE -->
+            <h2>Selamat Datang di MEKA</h2>
+            <!-- EDITABLE: WELCOME DESCRIPTION -->
+            <p>Pelajari dasar sistem digital, gerbang logika, dan rangkaian kontrol secara interaktif.</p>
+          </div>
+          <!-- ===== END EDITABLE CONTENT (Hero) ===== -->
+
+          <!-- Dashboard mini: diisi ulang oleh script.js (renderDashboard) setiap ada perubahan progress -->
+          <div class="dashboard-row" id="berandaDashboard">
+            <div class="dash-card dash-card-primary">
+              <span class="dash-label">Progress Belajar</span>
+              <span class="dash-value" id="dashProgressValue">0%</span>
+            </div>
+            <div class="dash-card">
+              <span class="dash-label">Materi</span>
+              <span class="dash-value" id="dashMateriValue">0 / 0 selesai</span>
+            </div>
+            <div class="dash-card">
+              <span class="dash-label">Kuis</span>
+              <span class="dash-value" id="dashQuizValue">Belum ada</span>
+            </div>
+          </div>
+
+          <button class="btn-primary btn-lanjut" id="btnLanjutBelajar">Lanjutkan Belajar →</button>
+        </div>
+      </section>
+
+      <!-- ================= MATERI (terstruktur per kategori) ================= -->
+      <section id="materi" class="section">
+        <div class="section-heading">
+          <h2>Materi Pembelajaran</h2>
+          <p class="section-desc">Pelajari bertahap mulai dari dasar sistem digital hingga rangkaian kombinasional.</p>
+        </div>
+
+        <!-- Daftar kategori (accordion) — dirender sepenuhnya oleh script.js dari MATERIALS_DATA -->
+        <div class="materi-categories" id="materiCategories"></div>
+
+        <!-- Tampilan satu submateri (lesson). Disembunyikan default, ditampilkan saat submateri diklik. -->
+        <div class="lesson-view hidden" id="lessonView">
+          <button class="btn-secondary" id="btnKembaliMateri">← Kembali ke Daftar Materi</button>
+          <p class="lesson-breadcrumb" id="lessonBreadcrumb"></p>
+          <h3 class="lesson-title" id="lessonTitle"></h3>
+          <div class="lesson-content" id="lessonContent"></div>
+          <div class="lesson-actions">
+            <button class="btn-primary" id="btnTandaiSelesai">Tandai sebagai selesai</button>
+            <!-- Hanya tampil untuk submateri Gerbang Logika, data-gate diisi oleh JS -->
+            <button class="btn-secondary hidden" id="btnKeSimulator">Coba di Simulator →</button>
+          </div>
+          <p class="lesson-microcopy">Jangan lupa perhatikan tabel kebenarannya sebelum lanjut.</p>
+        </div>
+      </section>
+
+      <!-- ================= SIMULATOR (dipindah dari MEKA 1.2, logika tidak diubah) ================= -->
+      <section id="simulator" class="section section-simulator">
+        <div class="section-heading">
+          <h2>Simulator Gerbang Logika</h2>
+          <p class="section-desc">Klik salah satu gerbang untuk mencoba saklar input dan melihat lampu output secara langsung.</p>
+        </div>
+
+        <!-- Kartu tiap gerbang logika: silakan duplikasi/ubah blok .gate-card untuk gerbang lain.
+             data-gate HARUS sama persis dengan key di objek gateLogic pada script.js. -->
+        <div class="gate-grid" id="gateGrid">
+
+          <article class="gate-card" data-gate="AND" tabindex="0" role="button" aria-label="Buka simulasi gerbang AND">
+            <div class="gate-card-head">
+              <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                <path d="M20 10 H45 A20 20 0 0 1 45 50 H20 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="40" x2="20" y2="40" stroke="currentColor" stroke-width="3"/>
+                <line x1="65" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <h3>Gerbang AND</h3>
+            </div>
+            <p>Keluaran bernilai 1 hanya jika <strong>semua</strong> masukan bernilai 1.</p>
+            <table class="truth-table">
+              <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td></tr>
+              </tbody>
+            </table>
+            <p class="gate-cta">Klik untuk simulasi →</p>
+          </article>
+
+          <article class="gate-card" data-gate="OR" tabindex="0" role="button" aria-label="Buka simulasi gerbang OR">
+            <div class="gate-card-head">
+              <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                <path d="M15 10 Q30 30 15 50 Q40 50 55 30 Q40 10 15 10 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="20" x2="17" y2="20" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="40" x2="17" y2="40" stroke="currentColor" stroke-width="3"/>
+                <line x1="55" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <h3>Gerbang OR</h3>
+            </div>
+            <p>Keluaran bernilai 1 jika <strong>salah satu atau lebih</strong> masukan bernilai 1.</p>
+            <table class="truth-table">
+              <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td></tr>
+              </tbody>
+            </table>
+            <p class="gate-cta">Klik untuk simulasi →</p>
+          </article>
+
+          <article class="gate-card" data-gate="NOT" tabindex="0" role="button" aria-label="Buka simulasi gerbang NOT">
+            <div class="gate-card-head">
+              <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                <path d="M20 12 L20 48 L55 30 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                <circle cx="60" cy="30" r="5" fill="none" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="30" x2="20" y2="30" stroke="currentColor" stroke-width="3"/>
+                <line x1="65" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <h3>Gerbang NOT</h3>
+            </div>
+            <p>Membalik nilai masukan tunggal; hanya memiliki satu input.</p>
+            <table class="truth-table">
+              <thead><tr><th>A</th><th>Out</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td></tr>
+              </tbody>
+            </table>
+            <p class="gate-cta">Klik untuk simulasi →</p>
+          </article>
+
+          <article class="gate-card" data-gate="NAND" tabindex="0" role="button" aria-label="Buka simulasi gerbang NAND">
+            <div class="gate-card-head">
+              <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                <path d="M20 10 H45 A20 20 0 0 1 45 50 H20 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                <circle cx="68" cy="30" r="5" fill="none" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="40" x2="20" y2="40" stroke="currentColor" stroke-width="3"/>
+                <line x1="73" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <h3>Gerbang NAND</h3>
+            </div>
+            <p>Kebalikan dari AND — keluaran 0 hanya jika semua masukan 1.</p>
+            <table class="truth-table">
+              <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td></tr>
+              </tbody>
+            </table>
+            <p class="gate-cta">Klik untuk simulasi →</p>
+          </article>
+
+          <article class="gate-card" data-gate="NOR" tabindex="0" role="button" aria-label="Buka simulasi gerbang NOR">
+            <div class="gate-card-head">
+              <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                <path d="M15 10 Q30 30 15 50 Q40 50 55 30 Q40 10 15 10 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                <circle cx="60" cy="30" r="5" fill="none" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="20" x2="17" y2="20" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="40" x2="17" y2="40" stroke="currentColor" stroke-width="3"/>
+                <line x1="65" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <h3>Gerbang NOR</h3>
+            </div>
+            <p>Kebalikan dari OR — keluaran 1 hanya jika semua masukan 0.</p>
+            <table class="truth-table">
+              <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td></tr>
+              </tbody>
+            </table>
+            <p class="gate-cta">Klik untuk simulasi →</p>
+          </article>
+
+          <article class="gate-card" data-gate="XOR" tabindex="0" role="button" aria-label="Buka simulasi gerbang XOR">
+            <div class="gate-card-head">
+              <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                <path d="M14 10 Q29 30 14 50 Q39 50 54 30 Q39 10 14 10 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                <path d="M8 10 Q23 30 8 50" fill="none" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="20" x2="10" y2="20" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="40" x2="10" y2="40" stroke="currentColor" stroke-width="3"/>
+                <line x1="54" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <h3>Gerbang XOR</h3>
+            </div>
+            <p>Keluaran 1 jika jumlah masukan bernilai 1 adalah <strong>ganjil</strong> (kedua input berbeda).</p>
+            <table class="truth-table">
+              <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td></tr>
+              </tbody>
+            </table>
+            <p class="gate-cta">Klik untuk simulasi →</p>
+          </article>
+
+          <!-- Kartu gerbang baru: tinggal duplikasi blok <article> ini untuk menambah gerbang lain. -->
+          <article class="gate-card" data-gate="XNOR" tabindex="0" role="button" aria-label="Buka simulasi gerbang XNOR">
+            <div class="gate-card-head">
+              <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                <path d="M14 10 Q29 30 14 50 Q39 50 54 30 Q39 10 14 10 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                <path d="M8 10 Q23 30 8 50" fill="none" stroke="currentColor" stroke-width="3"/>
+                <circle cx="59" cy="30" r="5" fill="none" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="20" x2="10" y2="20" stroke="currentColor" stroke-width="3"/>
+                <line x1="0" y1="40" x2="10" y2="40" stroke="currentColor" stroke-width="3"/>
+                <line x1="64" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <h3>Gerbang XNOR</h3>
+            </div>
+            <p>Kebalikan dari XOR — keluaran 1 jika <strong>kedua masukan sama</strong> nilainya.</p>
+            <table class="truth-table">
+              <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td></tr>
+              </tbody>
+            </table>
+            <p class="gate-cta">Klik untuk simulasi →</p>
+          </article>
+
+        </div>
+
+        <!-- Area simulasi interaktif — sama persis logikanya dengan MEKA 1.2 -->
+        <div class="simulation-panel hidden" id="simulationPanel">
+          <button class="btn-secondary btn-kembali" id="btnKembaliSimulasi">← Kembali ke Daftar Gerbang</button>
+          <h3 class="sim-title" id="simTitle">Simulasi Gerbang</h3>
+          <p class="sim-subtitle">Digital Logic Lab</p>
+          <div class="sim-body">
+            <div>
+              <p class="sim-flow-label">Input</p>
+              <div class="sim-switches" id="simSwitches"></div>
+            </div>
+            <div class="sim-flow-line" aria-hidden="true"></div>
+            <div>
+              <p class="sim-flow-label">Output</p>
+              <div class="sim-output">
+                <div class="lamp" id="simLamp" aria-hidden="true">
+                  <div class="lamp-glow"></div>
+                  <div class="lamp-bulb"></div>
+                </div>
+                <p class="sim-status" id="simStatus" aria-live="polite">A: 0, B: 0 =&gt; Output: 0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= KUIS ================= -->
+      <section id="kuis" class="section section-kuis">
+        <div class="section-heading">
+          <h2>Kuis</h2>
+          <p class="section-desc">Uji pemahamanmu lewat Mode Latihan (santai + pembahasan) atau Mode Ujian (10 soal acak). Fokus boleh, tegang jangan.</p>
+        </div>
+
+        <div class="quiz-mode-select">
+          <button class="tab-btn" id="btnModeLatihan">📘 Mode Latihan</button>
+          <button class="tab-btn" id="btnModeUjian">📝 Mode Ujian</button>
+        </div>
+
+        <!-- Seluruh isi kuis (pertanyaan, hasil, dsb) dirender secara dinamis oleh script.js -->
+        <div id="quizStage" class="quiz-stage">
+          <p class="quiz-placeholder">Pilih salah satu mode kuis di atas untuk mulai. 👆</p>
+        </div>
+
+        <div class="quiz-history">
+          <h3>Riwayat Kuis</h3>
+          <ul id="quizHistoryList" class="history-list">
+            <li class="history-empty">Belum ada percobaan. Yuk coba satu kuis dulu — gak akan lama kok.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================= PROGRESS ================= -->
+      <section id="progress" class="section section-progress">
+        <div class="section-heading">
+          <h2>Progress Belajar</h2>
+          <p class="section-desc">Pantau perkembangan belajarmu: materi selesai, level, XP, dan pencapaian.</p>
+        </div>
+
+        <div class="progress-dashboard">
+          <div class="progress-card progress-card-primary">
+            <div class="progress-ring-wrap">
+              <svg class="progress-ring" viewBox="0 0 100 100" aria-hidden="true">
+                <circle class="ring-track" cx="50" cy="50" r="42"></circle>
+                <circle class="ring-fill" id="progressRingFill" cx="50" cy="50" r="42"></circle>
+              </svg>
+              <span class="progress-ring-label" id="progressRingLabel">0%</span>
+            </div>
+            <div>
+              <p class="progress-card-label">Materi Selesai</p>
+              <p class="progress-card-value" id="progressLessonCount">0 / 0</p>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="progressBarFill" style="width:0%"></div>
+              </div>
+              <p class="progress-percent" id="progressPercentText">0%</p>
+            </div>
+          </div>
+
+          <div class="progress-card">
+            <p class="progress-card-label">Level</p>
+            <p class="progress-card-value" id="progressLevelValue">Level 1</p>
+            <p class="level-title" id="progressLevelTitle">Digital Newbie</p>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill xp-fill" id="xpBarFill" style="width:0%"></div>
+            </div>
+            <p class="progress-percent" id="xpText">0 / 250 XP</p>
+          </div>
+        </div>
+
+        <h3 class="achievements-title">Pencapaian</h3>
+        <div class="achievements-grid achievements-grid-celebratory" id="achievementsGrid"></div>
+      </section>
+
+      <!-- =====================================================
+           EDITABLE CONTENT — TENTANG MEKA
+           Kamu dapat mengubah teks di bagian ini secara manual.
+           Jangan menghapus ID/class HTML.
+           ===================================================== -->
+      <section id="tentang" class="section">
+        <div class="section-heading">
+          <!-- EDITABLE: TENTANG TITLE -->
+          <h2>Tentang MEKA</h2>
+          <!-- EDITABLE: TENTANG SUBTITLE -->
+          <p class="section-desc">Platform belajar Teknik Kontrol Mekatronika.</p>
+        </div>
+        <div class="explanation-card explanation-card-easter-egg-host">
+          <!-- EDITABLE PARAGRAPH 1 -->
+          <p>
+            MEKA adalah platform pembelajaran interaktif untuk jurusan Teknik Kontrol Mekatronika (TKM)
+            SMK Negeri 56. Website ini dibuat untuk membantu siswa memahami dasar sistem digital, gerbang
+            logika, aljabar Boolean, tabel kebenaran, hingga pengenalan rangkaian kombinasional — lengkap
+            dengan simulator interaktif dan kuis untuk menguji pemahaman.
+          </p>
+          <!-- EDITABLE PARAGRAPH 2 -->
+          <p>
+            Dibangun murni menggunakan HTML, CSS, dan JavaScript (tanpa framework) agar ringan dan mudah
+            di-hosting lewat GitHub Pages. Progress belajar, XP, level, dan riwayat kuis disimpan langsung
+            di browser masing-masing pengguna menggunakan <code>localStorage</code> — tanpa perlu akun atau
+            server.
+          </p>
+          <!-- ===== END EDITABLE CONTENT (Tentang MEKA) ===== -->
+
+          <!-- Easter egg pribadi pembuat website: SATU gambar dekoratif kecil, bukan maskot/fitur.
+               Tidak dipakai/direferensikan JS, murni CSS. Sengaja hanya muncul di sini saja.
+               WAJIB: file assets/site-easter-egg.png ikut di-upload ke GitHub (folder "assets"
+               harus ikut ter-drag), kalau tidak gambar tidak akan tampil sama sekali. -->
+          <img src="assets/site-easter-egg.png" alt="" aria-hidden="true" class="site-easter-egg">
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p>&copy; 2026 SMK Negeri 56 — Jurusan Mekatronika · MEKA v1.5</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Toast notifikasi saat achievement baru terbuka. Kondisi unlock tetap
+       dihitung sepenuhnya oleh script.js — ini murni tampilan notifikasinya. -->
+  <div class="achievement-toast" id="achievementToast" aria-live="polite">
+    <span class="toast-icon" id="achievementToastIcon">🏆</span>
+    <span class="toast-text">
+      <span class="toast-label">Achievement Terbuka</span>
+      <span class="toast-title" id="achievementToastTitle"></span>
+    </span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
